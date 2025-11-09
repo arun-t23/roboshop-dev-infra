@@ -3,7 +3,7 @@
 component=$1
 environment=$2
 dnf install ansible -y
-dnf install pip3.9 botocore
+
 
 # ansible-pull -U https://github.com/arun-t23/ansible-roboshop-roles-tf.git -e component=$component main.yaml
 
