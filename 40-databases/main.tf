@@ -176,14 +176,42 @@ connection {
 }
 
 resource "aws_route53_record" "mongodb" {
-  count   =   length(var.r53_db_names)
   zone_id = local.zone_id
-  name    = "${var.r53_db_names[count.index]}-${var.environment}.${var.domain_name}"
+  name    = "mongodb-${var.environment}.${var.domain_name}"
   type    = "A"
   ttl     = 1
-  records = [aws_instance.r53_db_names[count.index].private_ip]
+  records = [aws_instance.aws_instance.mongodb.private_ip]
   allow_overwrite = true
 }
+
+resource "aws_route53_record" "redis" {
+  zone_id = local.zone_id
+  name    = "redis-${var.environment}.${var.domain_name}"
+  type    = "A"
+  ttl     = 1
+  records = [aws_instance.aws_instance.redis.private_ip]
+  allow_overwrite = true
+}
+
+resource "aws_route53_record" "rabbitmq" {
+  zone_id = local.zone_id
+  name    = "rabbitmq-${var.environment}.${var.domain_name}"
+  type    = "A"
+  ttl     = 1
+  records = [aws_instance.aws_instance.rabbitmq.private_ip]
+  allow_overwrite = true
+}
+
+resource "aws_route53_record" "mysql" {
+  zone_id = local.zone_id
+  name    = "mysql-${var.environment}.${var.domain_name}"
+  type    = "A"
+  ttl     = 1
+  records = [aws_instance.aws_instance.mysql.private_ip]
+  allow_overwrite = true
+}
+
+
 
 
 

@@ -16,9 +16,4 @@ variable "domain_name" {
     default =   "cloudquestdev.com"
 }
 
-variable "r53_db_names" {
-    default = [
-        "mongodb","redis","mysql","rabbitmq"
-    ]
-}
 
