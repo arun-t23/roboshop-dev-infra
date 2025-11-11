@@ -176,11 +176,12 @@ connection {
 }
 
 resource "aws_route53_record" "mongodb" {
+  count   =   length(var.r53_db_names)
   zone_id = local.zone_id
-  name    = "mongodb-${var.environment}.${var.domain_name}"
+  name    = "${var.r53_db_names[count.index]}-${var.environment}.${var.domain_name}"
   type    = "A"
   ttl     = 1
-  records = [aws_instance.mongodb.private_ip]
+  records = [aws_instance.r53_db_names[count.index].private_ip]
   allow_overwrite = true
 }
 
