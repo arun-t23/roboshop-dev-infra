@@ -6,6 +6,7 @@ locals {
   mysql_sg_id =   data.aws_ssm_parameter.mysql_sg_id.value
   database_subnet_id = split(",", data.aws_ssm_parameter.database_subnet_ids.value)[0]
   common_name_suffix  = "${var.project_name}-${var.environment}"
+  zone_id = data.aws_route53_zone.zone.zone_id
   common_tags   =   {
     Project     =   var.project_name
     Environment =   var.environment
