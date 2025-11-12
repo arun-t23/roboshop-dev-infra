@@ -26,8 +26,8 @@ connection {
 
   ## Terraform copies this file to mysql server
   provisioner "file" {
-    source = "bootstrap.sh"
-    destination = "/tmp/bootstrap.sh"
+    source = "catalogue.sh"
+    destination = "/tmp/catalogue.sh"
   }
 
 
@@ -134,6 +134,8 @@ resource "aws_autoscaling_group" "catalogue" {
   }
   vpc_zone_identifier       = local.private_subnet_ids
   target_group_arns = [aws_lb_target_group.catalogue.arn] ## telling which target group to launch
+
+  ## arn = amazon resource name 
 
   dynamic "tag" { ## we get the iterator with name as tag
     for_each        =   merge(
