@@ -70,7 +70,7 @@ resource "aws_security_group_rule" "mongodb_catalogue" {
   to_port           = 27017
 }
 
-resource "aws_security_group_rule" "catalogue.backend-alb" {
+resource "aws_security_group_rule" "catalogue_backend-alb" {
   type              = "ingress"
   security_group_id = local.catalogue_sg_id ## request from backednd ALB goes to catalogue target group for health check on port 8080
   source_security_group_id  = local.backend_alb_sg_id
