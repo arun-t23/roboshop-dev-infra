@@ -5,3 +5,6 @@ variable "project_name" {
 variable "environment" {
     default = "dev"
 }
+variable "zone_id" {
+    default =   "Z101103636O9J5N20O0OE"
+}

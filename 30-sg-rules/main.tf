@@ -46,7 +46,7 @@ resource "aws_security_group_rule" "rabbitmq_bastion" {
 
 resource "aws_security_group_rule" "mysql_bastion" {
   type              = "ingress"
-  security_group_id = local.mysql_sg_id ## traffic to Database redis from bastion
+  security_group_id = local.mysql_sg_id ## traffic to Database mysql from bastion
   source_security_group_id  = local.bastion_sg_id
   from_port         = 22
   protocol          = "tcp"
@@ -55,7 +55,7 @@ resource "aws_security_group_rule" "mysql_bastion" {
 
 resource "aws_security_group_rule" "catalogue_bastion" {
   type              = "ingress"
-  security_group_id = local.catalogue_sg_id ## traffic to Database redis from bastion
+  security_group_id = local.catalogue_sg_id ## traffic to Database catalogue from bastion
   source_security_group_id  = local.bastion_sg_id
   from_port         = 22
   protocol          = "tcp"
@@ -68,4 +68,13 @@ resource "aws_security_group_rule" "mongodb_catalogue" {
   from_port         = 27017
   protocol          = "tcp"
   to_port           = 27017
+}
+
+resource "aws_security_group_rule" "catalogue.backend-alb" {
+  type              = "ingress"
+  security_group_id = local.catalogue_sg_id ## request from backednd ALB goes to catalogue target group for health check on port 8080
+  source_security_group_id  = local.backend_alb_sg_id
+  from_port         = 8080
+  protocol          = "tcp"
+  to_port           = 8080
 }
