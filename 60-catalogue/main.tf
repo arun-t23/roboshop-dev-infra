@@ -173,7 +173,7 @@ resource "aws_autoscaling_policy" "catalogue" {
 
 resource "aws_lb_listener_rule" "catalogue" {
   listener_arn = local.backend_alb_listener_arn
-  priority     = 80
+  priority     = 10
 
   action {
     type             = "forward"
@@ -184,5 +184,16 @@ resource "aws_lb_listener_rule" "catalogue" {
     host_header { ### host based path as discussed in class43 time:1hr05min
       values = ["catalogue.backend-alb-${var.environment}.${var.domain_name}"]
     }
+  }
+}
+
+resource "terraform_data" "catalogue_local" {
+  triggers_replace = [
+    aws_instance.catalogue.id
+  ]
+  
+  depends_on = [aws_autoscaling_policy.catalogue]
+  provisioner "local-exec" {
+    command = "aws ec2 terminate-instances --instance-ids ${aws_instance.catalogue.id}"
   }
 }
