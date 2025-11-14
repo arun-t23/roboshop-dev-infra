@@ -78,3 +78,13 @@ resource "aws_security_group_rule" "catalogue_backend-alb" {
   protocol          = "tcp"
   to_port           = 8080
 }
+
+
+resource "aws_security_group_rule" "frontend_alb_public" {
+  type              = "ingress"
+  security_group_id = local.frontend_alb_sg_id ## traffic to alb from public
+  cidr_blocks = ["0.0.0.0/0"]
+  from_port         = 443
+  protocol          = "tcp"
+  to_port           = 443
+}
