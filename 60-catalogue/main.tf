@@ -40,6 +40,7 @@ connection {
   }
 }
 
+##stopping the instance
 resource "aws_ec2_instance_state" "catalogue" {
   instance_id = aws_instance.catalogue.id
   state       = "stopped"
@@ -58,6 +59,7 @@ resource "aws_ami_from_instance" "catalogue" {
   )
 }
 
+## creating target group for catalogue servers
 resource "aws_lb_target_group" "catalogue" {
   name     =  "${local.common_name_suffix}-catalogue"
   port     = 8080
