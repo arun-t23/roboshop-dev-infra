@@ -1,10 +1,5 @@
-variable "project_name" {
-    default = "roboshop"
-}
 
-variable "environment" {
-    default = "dev"
-}
+
 variable "component" {
     default = "catalogue"
 }
@@ -12,7 +7,7 @@ variable "rule_priority" {
     default = 10
 }
 
-variable "component" {
+variable "components" {
     default = {
         catalogue   =   {
                 rule_priority = 10
