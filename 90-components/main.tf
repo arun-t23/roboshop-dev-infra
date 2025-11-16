@@ -5,7 +5,7 @@
 # }
 
 module "components" {
-    for_each    =   var.component
+    for_each    =   var.components
 
     source      =   "git::https://github.com/arun-t23/terraform-roboshop-component.git?ref=main"
 
