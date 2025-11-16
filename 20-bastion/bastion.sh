@@ -1,8 +1,8 @@
 #!/bin/bash
 
-growpart /dev/nvme0n1 4
-lvextend -L +30G /dev/mapper/RootVG-homeVol
-xfs_growfs /home
+sudo growpart /dev/nvme0n1 4
+sudo lvextend -L +30G /dev/mapper/RootVG-homeVol
+sudo xfs_growfs /home
 
 ### in case want to reduce the volume
 # sudo lvreduce -r -L 6G /dev/mapper/RootVG-rootVol
