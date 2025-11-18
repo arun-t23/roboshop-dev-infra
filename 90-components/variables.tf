@@ -1,8 +1,4 @@
 
-<<<<<<< HEAD
-
-=======
->>>>>>> b8c6479633c1e075464dddfaf1fa9ca8a449f68d
 variable "component" {
     default = "catalogue"
 }
