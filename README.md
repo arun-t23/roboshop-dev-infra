@@ -1,3 +1,3 @@
 # ROBOSHOP DEV INFRA
 
-![alt text](Architecture.png)
+![alt text](architecture.png)
